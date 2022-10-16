@@ -1,0 +1,1 @@
+HOME_PAGE = "https://www.tripadvisor.com/"page_title = "Tripadvisor"nick_name = "testuser2022"user_email = "ttesttrip@gmail.com"user_pwd = "TestHello"
