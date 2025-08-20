@@ -1,1 +1,1 @@
-HOME_PAGE = "https://www.tripadvisor.com/"page_title = "Tripadvisor"nick_name = "testuser2022"user_email = "ttesttrip@gmail.com"user_pwd = "TestHello"
+import osfrom dotenv import load_dotenvpath = load_dotenv()HOME_PAGE = "https://unsplash.com/"page_title = "Beautiful Free Images & Pictures | Unsplash"nick_name = "testuserTaiga"user_pwd = "TestHello"email_password = os.getenv("email_password")user_email = os.getenv("user_email")

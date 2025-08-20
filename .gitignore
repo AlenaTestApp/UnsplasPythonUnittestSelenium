@@ -1,0 +1,32 @@
+# Python
+__pycache__/
+*.py[cod]
+*.pyo
+*.pyd
+*.pdb
+*.egg-info/
+*.egg
+*.log
+
+# Environments
+.env
+venv/
+ENV/
+.venv/
+
+# IDEs
+.idea/
+.vscode/
+
+# macOS
+.DS_Store
+
+# Screenshots & cache
+screenshots/
+tests/screenshots/
+tests/chrome_profile/
+
+# Selenium browser profiles
+*.json
+*.db
+*.db-journal
