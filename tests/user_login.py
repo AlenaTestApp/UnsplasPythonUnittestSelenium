@@ -7,12 +7,11 @@ from config import *
 class uiTesting(BaseCase):
     def test_1_get_title(self):
         """Assert Page title is correct"""
-        print('Title ', self.unsplash.home_page.get_title())
-        assert self.unsplash.home_page.get_title() == page_title
+        self.assertEqual(self.unsplash.home_page.get_title(), page_title)
 
     def test_2_check_logo(self):
         """Assert Logo is displayed"""
-        assert self.unsplash.home_page.check_logo() is True
+        self.assertTrue(self.unsplash.home_page.check_logo())
 
     def test_3_user_login(self):
         """Validate User is able to Log in and User's nickname is correctly
