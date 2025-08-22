@@ -96,11 +96,12 @@ class HomePage(BasePage):
 
     def user_logout(self):
         """Function clicks on Logout button on Profile Picture.
-         After User is redirected to Home page, current URL is validated for 'loggedout' entry"""
+         After User is redirected to Home screen, returns Page URL"""
         WebDriverWait(self.driver, 20).until(EC.visibility_of_element_located(Locators.PROFILE_PICTURE))
         self.driver.find_element(*Locators.PROFILE_PICTURE).click()
-        self.wait(*Locators.LOGOUT_BTN).click()
-        logged_out = self.driver.current_url.split("=")[-1].lower()
+        logout = WebDriverWait(self.driver, 10).until(EC.visibility_of_element_located(Locators.LOGOUT_BTN))
+        logout.click()
+        logged_out = self.driver.current_url
         return logged_out
 
 

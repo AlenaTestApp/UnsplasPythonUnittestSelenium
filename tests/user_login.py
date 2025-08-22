@@ -57,10 +57,11 @@ class uiTesting(BaseCase):
                 self.driver.refresh()
 
     def test_7_user_logout(self):
-        """Test validates successful log out: URL contains 'logged out'"""
+        """Test validates successful log out: User is redirected to Home Page
+        after clicking on Logout button, URL should contain 'logged out'"""
         self.unsplash.home_page.user_login(USER_EMAIL, USER_PWD)
-        self.unsplash.home_page.user_logout()
-        self.assertEqual(self.unsplash.home_page.user_logout(), LOGOUT_CONF)
+        url = self.unsplash.home_page.user_logout()
+        self.assertIn(LOGOUT_CONF, url.lower(), f"'logged out' should be in URL, {url} instead")
 
 
 
