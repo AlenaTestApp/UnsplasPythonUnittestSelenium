@@ -1,3 +1,3 @@
-from .main_function import *
+from .page_classes import *
 from .locators import Locators
 

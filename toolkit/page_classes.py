@@ -1,21 +1,25 @@
-import time
 
 from toolkit.locators import Locators
 from toolkit.element import BasePageElement
 from config import *
 from selenium.webdriver.support.wait import WebDriverWait
 from selenium.webdriver.support import expected_conditions as EC
+from selenium.webdriver.common.keys import Keys
+from toolkit.healing import heal_find
+import requests
 
 
 class UnSplash:
     def __init__(self, driver):
         self.driver = driver
         self.home_page = HomePage(self.driver)
+        self.search_page = SearchPage(self.driver)
 
 
 class BasePage(object):
     login_email = BasePageElement(Locators.EMAIL)
     login_password = BasePageElement(Locators.PASSWORD)
+    search_field = BasePageElement(Locators.SEARCH_FIELD)
 
     def __init__(self, driver):
         self.driver = driver
@@ -103,6 +107,43 @@ class HomePage(BasePage):
         logout.click()
         logged_out = self.driver.current_url
         return logged_out
+
+
+class SearchPage(BasePage):
+
+
+    def search_by_query(self, query):
+        # self.wait(*Locators.SEARCH_FIELD)
+        # self.search_field = query + Keys.ENTER
+        # Trying the self-healing locators strategy
+        search_field = heal_find(self.driver,
+                                 primary=Locators.SEARCH_FIELD,
+                                 fallbacks=Locators.SEARCH_FIELD_FALLBACK,
+                                 intent=Locators.SEARCH_FIELD_INTENT)
+        search_field.clear()
+        search_field.send_keys(query + Keys.ENTER)
+
+    def make_request(self, url: str, query: str, per_page: int):
+        """Request to Unsplash server, returns status code, query relevant data
+        for number of pages specified in parameters"""
+        r = requests.get(
+            url,
+            params={"query": query, "per_page": per_page},
+            headers={"Authorization": f"Client-ID {ACCESS_KEY}"},
+            timeout=20,
+        )
+        return r.status_code, r.json()
+
+    def check_result(self, data, query):
+        """Check API response and count the results containing query in picture description"""
+        res_count = 0
+        for item in data["results"]:
+            description = item.get("description") or item.get("alt_description") or item.get("slag") or ""
+            if query.lower() in description.lower():
+                res_count += 1
+        return res_count
+
+
 
 
 

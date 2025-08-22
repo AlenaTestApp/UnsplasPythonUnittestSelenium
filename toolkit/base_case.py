@@ -3,7 +3,7 @@ from selenium import webdriver
 from webdriver_manager.chrome import ChromeDriverManager
 from selenium.webdriver.chrome.service import Service
 from config import *
-from toolkit.main_function import UnSplash
+from toolkit.page_classes import UnSplash
 import time
 import os
 

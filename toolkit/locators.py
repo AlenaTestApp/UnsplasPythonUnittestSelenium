@@ -4,7 +4,7 @@ from config import *
 
 class Locators(object):
 
-    # Home Page Locators
+    # Home Page Login Locators
     LOGO = (By.CSS_SELECTOR, "a[title='Home — Unsplash'] svg")
     LOGIN_HOME = (By.XPATH, "//a[contains(@href, '/login')]")
     CONT_WITH_EMAIL = (By.CSS_SELECTOR, "#ssoButtons > button > span.textContainer")
@@ -17,3 +17,15 @@ class Locators(object):
     LOGIN_ERROR = (By.XPATH, "//button[@type='button']/preceding::p")
     LOGOUT_BTN = (By.XPATH, "//span[contains(text(), 'Logout')]")
     LOGOUT_CONFIRMATION = (By.XPATH, "/div/p[contains(text(), 'Successfully logged out')]") # TBD
+
+
+    # Search Page
+    SEARCH_FIELD = (By.XPATH, "//input[@type = 'Search']")  # <- intended typo to check selfhealing locators: worked!
+    SEARCH_FIELD_FALLBACK = (By.XPATH, "//input[@placeholder = 'Search photos and illustrations']")
+    SEARCH_FIELD_INTENT = {
+        "attrs": {
+            "type": "search",
+            "title": "Search Unsplash"
+        }
+    }
+
