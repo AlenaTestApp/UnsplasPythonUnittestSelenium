@@ -62,5 +62,46 @@ class HomePage(BasePage):
         self.driver.find_element(*Locators.PROFILE_PICTURE).click()
         self.wait(*Locators.VIEW_PROFILE).click()
         current_url = self.driver.current_url
-        assert nick_name.lower() in current_url
+        assert NICK_NAME.lower() in current_url
+
+
+    def invalid_login_server_validation(self, email, password):
+        """Function perform Login attempt with Invalid Users credentials. Reads Error message"""
+        if self.driver.current_url == HOME_PAGE:
+            self.wait(*Locators.LOGIN_HOME).click()
+
+        email_field = self.wait(*Locators.EMAIL)
+        email_field.clear()
+        email_field.send_keys(email)
+
+        password_field = self.wait(*Locators.PASSWORD)
+        password_field.clear()
+        password_field.send_keys(password)
+
+        self.driver.find_element(*Locators.LOGIN_SUBMIT).click()
+        login_error = WebDriverWait(self.driver, 20).until(EC.visibility_of_element_located(Locators.LOGIN_ERROR)).text
+        return login_error
+
+
+    def invalid_login_browser_validation(self, email, password):
+        """Function attempts to log in with invalid credentials and
+        validate the browser built-in HTML5 rules. Return false if email input invalid/True otherwise"""
+        self.wait(*Locators.LOGIN_HOME).click()
+        self.login_email = email
+        self.login_password = password
+        email_el = self.driver.find_element(*Locators.EMAIL)
+        is_valid = email_el.get_property("validity")["valid"]
+        return is_valid
+
+
+    def user_logout(self):
+        """Function clicks on Logout button on Profile Picture.
+         After User is redirected to Home page, current URL is validated for 'loggedout' entry"""
+        WebDriverWait(self.driver, 20).until(EC.visibility_of_element_located(Locators.PROFILE_PICTURE))
+        self.driver.find_element(*Locators.PROFILE_PICTURE).click()
+        self.wait(*Locators.LOGOUT_BTN).click()
+        logged_out = self.driver.current_url.split("=")[-1].lower()
+        return logged_out
+
+
 
