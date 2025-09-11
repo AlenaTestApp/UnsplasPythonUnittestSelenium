@@ -1,7 +1,7 @@
 # 🌟 Unsplash Web Automation Framework
 
 ## 🎯 Overview
-A **modern test automation framework** for the [Unsplash](https://unsplash.com) **web application**, crafted with **Python, Selenium WebDriver, and UnitTest**. Built to deliver clean, reusable, and extendable automated testing solutions for seamless functional and UI validation.
+A **test automation framework** for the [Unsplash](https://unsplash.com) **web application**, crafted with **Python, Selenium WebDriver, and UnitTest**. Built to deliver clean, reusable, and extendable automated testing solutions for seamless functional and UI validation.
 
 ## ✨ Features
 - 🌐 **Automated browser-based testing** with Selenium WebDriver
